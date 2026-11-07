@@ -2,7 +2,7 @@
 
 ![Tests](https://github.com/RakibsCraft/log-analyser/actions/workflows/tests.yml/badge.svg)
 
-A Python command-line tool, which I'm building milestone by milestone, that reads Linux SSH authentication logs and flags attacks:
+A Python command-line tool that reads Linux SSH authentication logs and flags attacks:
 
 - **Brute force:** one IP making many failed logins in a short time
 - **Password spraying:** one IP trying many different usernames, often slowly to avoid lockouts
@@ -27,6 +27,16 @@ The sample log in `samples/auth.log` is a day on a web server containing:
 | 13:05 | 185.220.101.7 fails 7 times on `deploy`, gets in, then uses sudo to download and run a script | Compromised account (critical) and brute force (high) |
 
 It also contains normal staff logins, a mistyped password, a few failures from an internal backup server, and routine system noise, none of which should raise an alert.
+
+## Progress
+
+| Milestone | File | Tests | Status |
+|---|---|---|---|
+| 1. Parse log lines | `log_analyser/parser.py` | `tests/test_parser.py` | Not started |
+| 2. Classify IP addresses | `log_analyser/ip_utils.py` | `tests/test_ip_utils.py` | Not started |
+| 3. Detect attacks | `log_analyser/detectors.py` | `tests/test_detectors.py` | Not started |
+| 4. Build the report | `log_analyser/report.py` | `tests/test_report.py` | Not started |
+| 5. Command-line interface | `log_analyser/cli.py` | `tests/test_cli.py` | Not started |
 
 ## Usage
 
@@ -75,4 +85,4 @@ On a real Linux server, the log is at `/var/log/auth.log` (Debian, Ubuntu) or `/
 
 ## Testing
 
-Each test file has a `STARTED` switch at the top; tests for parts not yet built are skipped. GitHub Actions runs the tests on Python 3.10 and 3.13 on every push.
+Each milestone's test file has a `STARTED` switch at the top; tests for milestones not yet started are skipped. GitHub Actions runs the tests on Python 3.10 and 3.13 on every push.
